@@ -26,8 +26,5 @@ contract DeployDao is Script {
 
         //Deploy Governor
         governor = new VoteGovernor(voteToken, timelock);
-
-        //Transfer ownership of timelock to governor
-        timelock.transferOwnership(address(governor));
     }
 }
