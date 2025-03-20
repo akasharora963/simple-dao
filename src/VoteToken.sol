@@ -18,6 +18,10 @@ contract VoteToken is ERC20, ERC20Permit, ERC20Votes {
         return "mode=timestamp";
     }
 
+    function mint(address to, uint256 amount) public {
+        _mint(to, amount);
+    }
+
     // The following functions are overrides required by Solidity.
 
     function _update(
