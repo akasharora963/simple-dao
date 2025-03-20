@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.22;
 
-import {Script} from "forge-std/Script.sol";
+import {Script, console} from "forge-std/Script.sol";
 import {TimeLock} from "src/TimelockController.sol";
 import {VoteToken} from "src/VoteToken.sol";
 import {VoteGovernor} from "src/VoteGovernor.sol";
+import {Store} from "src/Store.sol";
 
 contract DeployDao is Script {
     // Deploy the dao
-
+    Store store;
     VoteToken voteToken;
     TimeLock timelock;
     VoteGovernor governor;
@@ -26,5 +27,14 @@ contract DeployDao is Script {
 
         //Deploy Governor
         governor = new VoteGovernor(voteToken, timelock);
+
+        //Deploy Store
+        store = new Store(address(timelock));
+
+        console.log("Dao deployed");
+        console.log("Vote Token", address(voteToken));
+        console.log("Timelock deployed", address(timelock));
+        console.log("Governor", address(governor));
+        console.log("Store", address(store));
     }
 }
